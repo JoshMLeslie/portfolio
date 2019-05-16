@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import {
   MatButtonModule
   , MatCheckboxModule
   , MatSidenavModule
 } from '@angular/material';
-
 
 /** They say you should only import what you need into any given module, but.**/
 
@@ -19,7 +18,7 @@ import {
     , MatCheckboxModule
     , MatSidenavModule
     , FormsModule
-    , BrowserAnimationsModule
+    , RouterModule
   ]
   , exports: [
     CommonModule
@@ -27,7 +26,7 @@ import {
     , MatCheckboxModule
     , MatSidenavModule
     , FormsModule
-    , BrowserAnimationsModule
+    , RouterModule
   ]
 })
 export class CoreModule { }

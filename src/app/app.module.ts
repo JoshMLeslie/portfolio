@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { CoreModule } from './core.module';
+import { HomeModule } from './home/home.module';
+import { AboutModule } from './about/about.module';
+import { ResumeModule } from './resume/resume.module';
 
 @NgModule({
   declarations: [
@@ -12,9 +16,13 @@ import { CoreModule } from './core.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRouting,
     CoreModule,
-    NavBarModule
+    NavBarModule,
+    HomeModule,
+    AboutModule,
+    ResumeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

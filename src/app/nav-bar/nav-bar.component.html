@@ -1,19 +1,12 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side"
-              [(opened)]="opened"
-              (opened)="events.push('open!')"
-              (closed)="events.push('close!')">
-    Sidenav content
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <button mat-flat-button [routerLink]="['/home']">Home</button>
+    <button mat-flat-button [routerLink]="['/resume']">Resume</button>
+    <button mat-flat-button [routerLink]="['/about']">About</button>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <p>
-      <mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox>
-    </p>
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-    <p>Events:</p>
-    <div class="example-events">
-      <div *ngFor="let e of events">{{e}}</div>
-    </div>
+    <button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
