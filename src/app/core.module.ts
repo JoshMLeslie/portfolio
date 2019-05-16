@@ -8,7 +8,7 @@ import {
   , MatSidenavModule
 } from '@angular/material';
 
-/** They say you should only import what you need into any given module, but.**/
+/** They say you should only import what you need into any given module, but. */
 
 @NgModule({
   declarations: []
