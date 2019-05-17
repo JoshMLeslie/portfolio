@@ -1,12 +1,37 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-    <button mat-flat-button [routerLink]="['/home']">Home</button>
-    <button mat-flat-button [routerLink]="['/resume']">Resume</button>
-    <button mat-flat-button [routerLink]="['/about']">About</button>
+<mat-sidenav-container class="nav-container">
+  <!-- POPOUT -->
+  <mat-sidenav #sidenav mode="side">
+    <div fxLayout="column" fxLayoutAlign="center center" class="side-button-size-adjust">
+      <button mat-flat-button (click)="selected = 'Home'" [routerLink]="['/home']"
+        routerLinkActive="active-link">Home</button>
+      <button mat-flat-button (click)="selected = 'Resume'" [routerLink]="['/resume']"
+        routerLinkActive="active-link">Resume</button>
+      <button mat-flat-button (click)="selected = 'About'" [routerLink]="['/about']"
+        routerLinkActive="active-link">About</button>
+    </div>
   </mat-sidenav>
 
+  <!-- HEADER -->
   <mat-sidenav-content>
-    <button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button>
+    <div fxLayoutAlign="space-between center">
+      <button mat-flat-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div fxLayoutAlign="center center" class="mr-1 header-button-size-adjust">
+        <mat-tab-group (selectedTabChange)="changeTab($event)">
+          <mat-tab label="Home" [ngClass]="{'active-link': selected === 'Home'}">
+          </mat-tab>
+          <mat-tab label="Resume" [ngClass]="{'active-link': selected === 'Resume'}">
+          </mat-tab>
+          <mat-tab label="About" [ngClass]="{'active-link': selected === 'About'}">
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+
+    <h1 class="ml-1">{{selected}}</h1>
+
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

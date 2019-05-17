@@ -4,13 +4,19 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: 'home', loadChildren: './home/home.module#HomeModule'
+    path: 'home'
+    , data: {title: 'Home' }
+    , loadChildren: './home/home.module#HomeModule'
   },
   {
-    path: 'about', loadChildren: './about/about.module#AboutModule'
+    path: 'about'
+    , data: {title: 'About' }
+    , loadChildren: './about/about.module#AboutModule'
   },
   {
-    path: 'resume', loadChildren: './resume/resume.module#ResumeModule'
+    path: 'resume'
+    , data: {title: 'Resume' }
+    , loadChildren: './resume/resume.module#ResumeModule'
   },
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
