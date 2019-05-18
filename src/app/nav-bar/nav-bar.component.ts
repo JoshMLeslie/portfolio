@@ -11,16 +11,18 @@ import { filter, take } from 'rxjs/operators';
 export class NavBarComponent implements OnInit {
 
   selected: string = 'Home';
+  _selections: {[tab: string]: number} = {'Home': 0,'Resume': 1,'About': 2};
 
   constructor(
     private router: Router
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.router.events.pipe(
       filter(event => event instanceof ChildActivationEnd)
       , take(1)
     ).subscribe((event: ChildActivationEnd) => this.selected = event.snapshot.data.title);
+  }
+
+  ngOnInit() {
   }
 
   changeTab(event: MatTabChangeEvent) {
