@@ -17,16 +17,7 @@
   <router-outlet></router-outlet>
 
   <!-- Bottom menu for mobile devices re: thumb control -->
-  <div fxShow fxHide.gt-sm="true" fxLayoutAlign="flex-end center">
-    <div fxLayoutAlign="center center" class="header-button-size-adjust">
-      <mat-tab-group [selectedIndex]="_selections[selected]" (selectedTabChange)="changeTab($event)">
-        <mat-tab label="Home" [ngClass]="{'active-link': selected === 'Home'}">
-        </mat-tab>
-        <mat-tab label="Resume" [ngClass]="{'active-link': selected === 'Resume'}">
-        </mat-tab>
-        <mat-tab label="About" [ngClass]="{'active-link': selected === 'About'}">
-        </mat-tab>
-      </mat-tab-group>
-    </div>
+  <div fxShow fxHide.gt-sm="true">
+    <app-rotary-menu></app-rotary-menu>
   </div>
 </div>

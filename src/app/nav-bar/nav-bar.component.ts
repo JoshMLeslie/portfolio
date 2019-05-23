@@ -15,11 +15,16 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     private router: Router
+    , private route: ActivatedRoute
   ) {
     this.router.events.pipe(
       filter(event => event instanceof ChildActivationEnd)
-      , take(1)
-    ).subscribe((event: ChildActivationEnd) => this.selected = event.snapshot.data.title);
+    ).subscribe((event: ChildActivationEnd) => {
+        const title = event.snapshot.data.title;
+        if (title) {
+          this.selected = title;
+        }
+    });
   }
 
   ngOnInit() {

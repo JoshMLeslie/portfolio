@@ -1,0 +1,24 @@
+<div class="rotary-container">
+  <!-- persistent menu icon -->
+  <button mat-fab (click)="toggle()"
+          color="primary"
+          [@fabToggler]="{value: isOpen.toString()}">
+    <mat-icon *ngIf="!isOpen">add</mat-icon>
+    <mat-icon *ngIf="isOpen">close</mat-icon>
+  </button>
+  <!-- revealed icons -->
+  <div *ngIf="isOpen">
+    <button *ngFor="let icon of icons; index as idx"
+            mat-mini-fab
+            id="rotary-btn-{{idx}}"
+            color="primary"
+            (click)="goLink(icon.link)"
+            [attr.aria-label]="icon.label">
+      <mat-icon *ngIf="!icon.native"
+                [ngClass]="icon.class"
+                [svgIcon]="icon.icon"></mat-icon>
+      <mat-icon *ngIf="icon.native"
+                [ngClass]="icon.class">{{icon.icon}}</mat-icon>
+    </button>
+  </div>
+</div>

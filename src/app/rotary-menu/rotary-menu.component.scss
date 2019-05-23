@@ -1,0 +1,50 @@
+// https: //medium.com/@webdev_aaron/fab-speed-dial-with-angular-5-2-angular-material-be696fc14967
+
+.rotary-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 100;
+  
+  > button {
+      z-index: 101;
+      box-shadow: none !important;
+  }
+
+}
+
+// https://codepen.io/kilchenmann/pen/dGGGJJ Less converted to SCSS using http://less2scss.awk5.com/
+
+@mixin rotary-transform($rotation: 0, $translate: 20) {
+  @supports(transition: initial) {
+    transform: translateX(-2rem) rotate($rotation*1deg) translate($translate*1px) rotate(-1deg*$rotation);
+
+    transition: all 5s ease-in-out;
+  }
+}
+
+/* Define two variables as the loop limits */
+$_from : 0;
+$to : 8; // number of max steps
+
+$start: 155;
+
+$_angle: (360 / $to);
+$circle-size: 40;
+$radius-factor: 1.5;
+
+@mixin loop($_index) {
+    @if($_index < $to) {
+        // *ngFor="let button of buttons; index as idx"...> <button #rotary-btn-{{idx}} ...></> 
+        #rotary-btn-#{$_index} {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            
+            @include rotary-transform(($_index * $_angle) + $start, ($circle-size*$radius-factor));
+        }
+
+        @include loop($_index + 1);
+    }
+}
+@include loop($_from);

@@ -9,7 +9,7 @@ import { CoreModule } from '../core.module';
   declarations: [HomeComponent],
   imports: [
     CoreModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ]
 })
 export class HomeModule { }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { ResumeModule } from './resume/resume.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRouting,
     CoreModule,
     NavBarModule,
