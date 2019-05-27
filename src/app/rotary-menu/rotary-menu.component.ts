@@ -78,7 +78,7 @@ export class RotaryMenuComponent implements OnInit {
 
   goLink(link: string) {
     if (/www|http/.test(link)) {
-      window.open(link, '_blank');
+      window.open(link, '_blank', 'noopener');
     } else {
       this.router.navigateByUrl(link);
     }

@@ -2,15 +2,17 @@
   <!-- persistent menu icon -->
   <button mat-fab (click)="toggle()"
           color="primary"
-          [@fabToggler]="{value: isOpen.toString()}">
+          [@rotaryMenuToggle]="isOpen">
     <mat-icon *ngIf="!isOpen">add</mat-icon>
     <mat-icon *ngIf="isOpen">close</mat-icon>
   </button>
   <!-- revealed icons -->
-  <div *ngIf="isOpen">
+  <div>
+    <!-- id="rotary-btn-{{idx}}" -->
     <button *ngFor="let icon of icons; index as idx"
             mat-mini-fab
-            id="rotary-btn-{{idx}}"
+            class="rotary-btn"
+            [ngClass]="isOpen ? 'rotary-btn-' + idx : ''"
             color="primary"
             (click)="goLink(icon.link)"
             [attr.aria-label]="icon.label">
