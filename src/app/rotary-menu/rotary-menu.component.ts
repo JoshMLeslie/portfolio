@@ -77,6 +77,8 @@ export class RotaryMenuComponent implements OnInit {
   }
 
   goLink(link: string) {
+    this.toggle();
+
     if (/www|http/.test(link)) {
       window.open(link, '_blank', 'noopener');
     } else {
