@@ -12,6 +12,10 @@
     </div>
   </div>
 
+  <mat-toolbar fxShow fxHide.gt-sm="true" fxLayoutAlign="center center" color="primary">
+    {{selected}}
+  </mat-toolbar>
+
   <router-outlet></router-outlet>
 
   <!-- Bottom menu for mobile devices re: thumb control -->
