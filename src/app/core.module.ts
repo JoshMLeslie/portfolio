@@ -10,6 +10,7 @@ import {
   , MatIconModule
   , MatCardModule
   , MatTabsModule
+  , MatToolbarModule
 } from '@angular/material';
 
 /** They say you should only import what you need into any given module, but. */
@@ -27,6 +28,7 @@ import {
     , MatIconModule
     , MatCardModule
     , MatTabsModule
+    , MatToolbarModule
   ]
   , exports: [
     CommonModule
@@ -39,6 +41,7 @@ import {
     , MatIconModule
     , MatCardModule
     , MatTabsModule
+    , MatToolbarModule
   ]
 })
 export class CoreModule { }

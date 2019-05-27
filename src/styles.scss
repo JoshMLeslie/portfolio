@@ -14,3 +14,12 @@
 .max-height-md {
     max-height: 3rem;
 }
+
+.clear-link {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
