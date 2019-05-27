@@ -33,8 +33,7 @@ const LoadDemo = (): IMenu[] => {
       native: true
     }
   ];
-}
-
+};
 
 export interface IMenu {
   'label': string;
@@ -42,7 +41,7 @@ export interface IMenu {
   'link': string;
   'class'?: string;
   'native'?: boolean;
-}
+};
 
 @Component({
   selector: 'app-rotary-menu',
