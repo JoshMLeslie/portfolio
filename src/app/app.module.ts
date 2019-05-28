@@ -24,7 +24,7 @@ import { ResumeModule } from './resume/resume.module';
     NavBarModule,
     HomeModule,
     AboutModule,
-    ResumeModule
+    ResumeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
