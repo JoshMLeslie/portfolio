@@ -11,6 +11,8 @@
       <span>DESIGN</span>
     </div>
 
+    <span *ngIf="focus === 'right' || focus === 'bumpLeft'" class="rotated-title-left">WEB DESIGN</span>
+
     <app-nav-bar *ngIf="focus === 'left' || focus === 'bumpRight'"></app-nav-bar>
   </section>
 
@@ -25,6 +27,8 @@
       <span>INDUSTRIAL</span>
       <span>DESIGN</span>
     </div>
+
+    <span *ngIf="focus === 'left' || focus === 'bumpRight'" class="rotated-title-right">INDUSTRIAL DESIGN</span>
 
     <app-nav-bar *ngIf="focus === 'right' || focus === 'bumpLeft'"></app-nav-bar>
   </section>
