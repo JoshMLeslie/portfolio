@@ -5,11 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
-import { NavBarModule } from './nav-bar/nav-bar.module';
 import { CoreModule } from './core.module';
 import { HomeModule } from './home/home.module';
 import { AboutModule } from './about/about.module';
 import { ResumeModule } from './resume/resume.module';
+import { SplitScreenModule } from './split-screen/split-screen.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +21,10 @@ import { ResumeModule } from './resume/resume.module';
     HttpClientModule,
     AppRouting,
     CoreModule,
-    NavBarModule,
     HomeModule,
     AboutModule,
     ResumeModule,
+    SplitScreenModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

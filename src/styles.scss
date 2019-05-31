@@ -3,6 +3,18 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import './assets/margins';
 
+html {
+    background: black;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0 !important; // why
+}
+
 .active-link {
     border-bottom: 2px solid blue !important;
     border-radius: 0 !important;

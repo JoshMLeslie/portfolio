@@ -1,0 +1,26 @@
+.split-screen-parent {
+  height: 100%;
+
+  section {
+    height: 100%;
+    background: #c4c4c4;
+    position: relative;
+
+    opacity: 0.5;
+
+    overflow: hidden;
+
+    &:hover {
+      // hovering while state = 'none'
+      opacity: 1;
+    }
+
+    span {
+      font-size: 400%;
+    }
+  }
+}
+
+.selected {
+  opacity: 1 !important;
+}

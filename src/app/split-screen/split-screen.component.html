@@ -1,0 +1,31 @@
+<div fxLayoutAlign="space-between center" class="split-screen-parent">
+  <!-- LEFT SIDE -->
+  <section fxLayoutAlign="center center"
+          [@leftScreen]="focus"
+          (mouseenter)="handleBump('left')"
+          (click)="focus = 'left'"
+          class="left-screen-parent"
+          [ngClass]="{'selected': focus === 'left'  || focus === 'bumpLeft'}">
+    <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
+      <span>WEB</span>
+      <span>DESIGN</span>
+    </div>
+
+    <app-nav-bar *ngIf="focus === 'left' || focus === 'bumpRight'"></app-nav-bar>
+  </section>
+
+  <!-- RIGHT SIDE -->
+  <section fxLayoutAlign="center center"
+          [@rightScreen]="focus"
+          (mouseenter)="handleBump('right')"
+          (click)="focus = 'right'"
+          class="right-screen-parent"
+          [ngClass]="{'selected': focus === 'right' || focus === 'bumpRight'}">
+    <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
+      <span>INDUSTRIAL</span>
+      <span>DESIGN</span>
+    </div>
+
+    <app-nav-bar *ngIf="focus === 'right' || focus === 'bumpLeft'"></app-nav-bar>
+  </section>
+</div>
