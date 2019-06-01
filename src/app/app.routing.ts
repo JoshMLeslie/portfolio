@@ -6,17 +6,17 @@ const routes: Routes = [
   {
     path: 'home'
     , data: {title: 'Home' }
-    , loadChildren: './home/home.module#HomeModule'
+    , loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'about'
     , data: {title: 'About' }
-    , loadChildren: './about/about.module#AboutModule'
+    , loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
   },
   {
     path: 'resume'
     , data: {title: 'Resume' }
-    , loadChildren: './resume/resume.module#ResumeModule'
+    , loadChildren: () => import('./resume/resume.module').then(m => m.ResumeModule)
   },
   {
     path: '', redirectTo: 'home', pathMatch: 'full'
