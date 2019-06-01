@@ -12,13 +12,7 @@ type IFocus = 'none' | 'left' | 'right' | 'bumpLeft' | 'bumpRight';
   animations: ScreenMovementAnimation
 })
 export class SplitScreenComponent implements OnInit {
-  // exploded 'focus' for debugging
-  private _focus: IFocus = 'none';
-  public set focus(move: IFocus) {
-    this._focus = move;
-    console.log(move);
-  }
-  public get focus(): IFocus { return this._focus; }
+  focus: IFocus = 'none';
 
   constructor() { }
 

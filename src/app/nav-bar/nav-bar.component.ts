@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ChildActivationEnd } from '@angular/router';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute, ChildActivationEnd, } from '@angular/router';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
+
+type ITab = 'Home' | 'Resume' | 'About';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,13 +14,13 @@ import { filter, take } from 'rxjs/operators';
 })
 export class NavBarComponent implements OnInit {
 
-  selected: string = 'Home';
-  _selections: {[tab: string]: number} = {'Home': 0,'Resume': 1,'About': 2};
+  public tabs: ITab[] = ['Home' , 'Resume' , 'About'];
 
-  constructor(
-    private router: Router
-    , private route: ActivatedRoute
-  ) {
+  public selected: ITab = 'Home';
+  private _selectedIdx = new Subject<number>();
+  public selectedIdx = this._selectedIdx.asObservable();
+
+  constructor(private router: Router) {
     this.router.events.pipe(
       filter(event => event instanceof ChildActivationEnd)
     ).subscribe((event: ChildActivationEnd) => {
@@ -31,8 +35,12 @@ export class NavBarComponent implements OnInit {
   }
 
   changeTab(event: MatTabChangeEvent) {
-    this.selected = event.tab.textLabel;
-    this.router.navigateByUrl(this.selected.toLowerCase());
+    this.selected = event.tab.textLabel as ITab;
+    this._selectedIdx.next(event.index);
+
+    // // there's definitely a better way but none of them are working.
+    const url = this.router.url.match(/\/\w+/)[0] + '/' + this.selected.toLowerCase();
+    this.router.navigateByUrl(url);
   }
 
 }

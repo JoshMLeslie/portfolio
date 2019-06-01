@@ -4,25 +4,53 @@ import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: 'home'
-    , data: {title: 'Home' }
-    , loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    path: 'web'
+    , children: [
+      {
+        path: 'home'
+        , data: {title: 'Home' }
+        , loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: 'about'
+        , data: {title: 'About' }
+        , loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+      },
+      {
+        path: 'resume'
+        , data: {title: 'Resume' }
+        , loadChildren: () => import('./resume/resume.module').then(m => m.ResumeModule)
+      },
+      {
+        path: '', pathMatch: 'full', redirectTo: 'home'
+      }
+    ]
   },
   {
-    path: 'about'
-    , data: {title: 'About' }
-    , loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+    path: 'industrial'
+    , children: [
+      {
+        path: 'home'
+        , data: { title: 'Home' }
+        , loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: 'about'
+        , data: { title: 'About' }
+        , loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+      },
+      {
+        path: 'resume'
+        , data: { title: 'Resume' }
+        , loadChildren: () => import('./resume/resume.module').then(m => m.ResumeModule)
+      },
+      {
+        path: '', pathMatch: 'full', redirectTo: 'home'
+      }
+    ]
   },
   {
-    path: 'resume'
-    , data: {title: 'Resume' }
-    , loadChildren: () => import('./resume/resume.module').then(m => m.ResumeModule)
-  },
-  {
-    path: '', redirectTo: 'home', pathMatch: 'full'
-  },
-  {
-    path: '**', redirectTo: 'home'
+    path: '**', redirectTo: ''
   }
 ];
 

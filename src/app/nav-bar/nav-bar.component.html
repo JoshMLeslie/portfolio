@@ -1,13 +1,10 @@
 <div class="nav-container">
   <div fxShow fxHide.lt-md="true" fxLayoutAlign="flex-end center">
     <div fxLayoutAlign="center center" class="header-button-size-adjust">
-      <mat-tab-group [selectedIndex]="_selections[selected]" (selectedTabChange)="changeTab($event)">
-        <mat-tab label="Home" [ngClass]="{'active-link': selected === 'Home'}">
-        </mat-tab>
-        <mat-tab label="Resume" [ngClass]="{'active-link': selected === 'Resume'}">
-        </mat-tab>
-        <mat-tab label="About" [ngClass]="{'active-link': selected === 'About'}">
-        </mat-tab>
+      <mat-tab-group [selectedIndex]="selectedIdx | async" (selectedTabChange)="changeTab($event)">
+        <mat-tab *ngFor="let tab of tabs"
+                  [label]="tab"
+                  [ngClass]="{'active-link': selected === tab}"></mat-tab>
       </mat-tab-group>
     </div>
   </div>

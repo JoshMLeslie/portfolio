@@ -4,6 +4,7 @@
           [@leftScreen]="focus"
           (mouseenter)="handleBump('left')"
           (click)="focus = 'left'"
+          routerLink="/web"
           class="left-screen-parent"
           [ngClass]="{'selected': focus === 'left'  || focus === 'bumpLeft'}">
     <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
@@ -21,6 +22,7 @@
           [@rightScreen]="focus"
           (mouseenter)="handleBump('right')"
           (click)="focus = 'right'"
+          routerLink="/industrial"
           class="right-screen-parent"
           [ngClass]="{'selected': focus === 'right' || focus === 'bumpRight'}">
     <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
