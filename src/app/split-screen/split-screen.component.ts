@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { CdkDragMove, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 import { ScreenMovementAnimation } from './split-screen.animation';
 
-type IFocus = 'none' | 'left' | 'right' | 'bumpLeft' | 'bumpRight';
+type IFocus = 'none' | 'left' | 'right' | 'bumpLeft' | 'bumpRight' |
+                        'top' | 'bottom' | 'bumpTop' | 'bumpBottom';
 
 
 @Component({
@@ -12,7 +14,26 @@ type IFocus = 'none' | 'left' | 'right' | 'bumpLeft' | 'bumpRight';
   animations: ScreenMovementAnimation
 })
 export class SplitScreenComponent implements OnInit {
-  focus: IFocus = 'none';
+  _focus: IFocus = 'none';
+  get focus(): IFocus {
+    return this._focus;
+  }
+  set focus(val: IFocus) {
+    this._focus = val;
+  }
+  setFocus(val: IFocus) {
+    if (this._focus === 'none') {
+      this._focus = val;
+    }
+  }
+
+
+  _menuStretch: number = 0;
+  menuStretch = (side: 'top' | 'bottom'): number => {
+    return this.topBottomInverse(this.focus) === side ? this._menuStretch : 0;
+    /** TODO: sanitizing unsafe style value */
+    // return this.topBottomInverse(this.focus) === side ? `${this._menuStretch}%` : `calc(${100 - this._menuStretch}% - 1rem`;
+  }
 
   constructor() { }
 
@@ -48,6 +69,37 @@ export class SplitScreenComponent implements OnInit {
           break;
       }
     }
+  }
 
+  // Mobile handling of top-bottom split
+  // Painful but accomplished. Suggested by Alec 19.06.02
+  topBottomInverse(side: IFocus | 'top' | 'bottom') {
+    switch (side) {
+      case 'top':
+        return 'bottom';
+        break;
+      case 'bottom':
+        return 'top';
+        break;
+    }
+  }
+
+  handleDragEnd(e: CdkDragEnd) {
+    const distY: number = Math.abs(e.distance.y);
+    if (distY > 50) { // px
+      this.focus = this.topBottomInverse(this.focus);
+    } else {
+      this._menuStretch = 7.5;
+    }
+  }
+  handleDrag(e: CdkDragMove) {
+    const distY: number = Math.abs(e.distance.y);
+    if (distY > 50) { // px
+      this.focus = this.topBottomInverse(this.focus);
+    } else {
+      this._menuStretch = distY / 2; // scaling reduction
+    }
+
+    e.source.reset(); // reset position of element on page
   }
 }

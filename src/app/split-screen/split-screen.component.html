@@ -1,4 +1,7 @@
-<div fxLayoutAlign="space-between center" class="split-screen-parent">
+<!-- DESKTOP -->
+<!-- DESKTOP -->
+<div fxShow fxHide.lt-sm="true"
+  fxLayoutAlign="space-between center" class="split-screen-parent-desktop">
   <!-- LEFT SIDE -->
   <section fxLayoutAlign="center center"
           [@leftScreen]="focus"
@@ -33,5 +36,49 @@
     <span *ngIf="focus === 'left' || focus === 'bumpRight'" class="rotated-title-right">INDUSTRIAL DESIGN</span>
 
     <app-nav-bar *ngIf="focus === 'right' || focus === 'bumpLeft'"></app-nav-bar>
+  </section>
+</div>
+
+<!-- MOBILE -->
+<!-- MOBILE -->
+<div fxShow fxHide.gt-xs="true" 
+  fxLayoutAlign="space-between center" fxLayout="column" class="split-screen-parent-mobile">
+  <!-- Top -->
+  <section cdkDragLockAxis="y" cdkDrag
+    fxLayoutAlign="center center" [@topScreen]="focus"
+    (cdkDragMoved)="handleDrag($event)"
+    (cdkDragEnded)="handleDragEnd($event)"
+    [style.height.%]="menuStretch('top')"
+    (click)="setFocus('top')"
+    routerLink="/web" class="top-screen-parent"
+    [ngClass]="{'selected': focus === 'top'  || focus === 'bumpTop'}">
+    <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
+      <span>WEB</span>
+      <span>DESIGN</span>
+    </div>
+
+    <span *ngIf="focus === 'bottom' || focus === 'bumpTop'">WEB DESIGN</span>
+
+    <app-nav-bar *ngIf="focus === 'top' || focus === 'bumpBottom'"></app-nav-bar>
+  </section>
+
+  <!-- Bottom -->
+  <section cdkDragLockAxis="y" cdkDrag
+    fxLayoutAlign="center center"
+    [@bottomScreen]="focus"
+    (cdkDragMoved)="handleDrag($event)"
+    (cdkDragEnded)="handleDragEnd($event)"
+    [style.height.%]="menuStretch('bottom')"
+    (click)="setFocus('bottom')"
+    routerLink="/industrial" class="bottom-screen-parent"
+    [ngClass]="{'selected': focus === 'bottom' || focus === 'bumpBottom'}">
+    <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
+      <span>INDUSTRIAL</span>
+      <span>DESIGN</span>
+    </div>
+
+    <span *ngIf="focus === 'top' || focus === 'bumpBottom'">INDUSTRIAL DESIGN</span>
+
+    <app-nav-bar *ngIf="focus === 'bottom' || focus === 'bumpTop'"></app-nav-bar>
   </section>
 </div>

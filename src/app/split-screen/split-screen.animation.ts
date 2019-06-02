@@ -51,5 +51,33 @@ export const ScreenMovementAnimation = [
             width: '10%'
         })),
         transition('* => *', animate('500ms 0s cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+    trigger('topScreen', [
+        state('none', style({
+            height: 'calc(50% - 0.5rem)'
+        })),
+        /** when top is active */
+        state('top', style({
+            height: 'calc(92.5% - 1rem)'
+        })),
+        /** when bottom is active */
+        state('bottom', style({
+            height: '7.5%'
+        })),
+        transition('* => *', animate('500ms 0s cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+    trigger('bottomScreen', [
+        state('none', style({
+            height: 'calc(50% - 0.5rem)'
+        })),
+        /** when top is active */
+        state('top', style({
+            height: '7.5%'
+        })),
+        /** when bottom is active */
+        state('bottom', style({
+            height: 'calc(92.5% - 1rem)'
+        })),
+        transition('* => *', animate('500ms 0s cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ])
 ];

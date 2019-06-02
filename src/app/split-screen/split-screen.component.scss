@@ -1,8 +1,8 @@
-.split-screen-parent {
+.split-screen-parent-desktop,
+.split-screen-parent-mobile {
   height: 100%;
 
   section {
-    height: 100%;
     background: #c4c4c4;
     position: relative;
 
@@ -11,13 +11,25 @@
 
     overflow: hidden;
 
+    span {
+      font-size: 5vw;
+    }
+  }
+}
+
+.split-screen-parent-mobile {
+  section {
+    width: 100%;
+  }
+}
+
+.split-screen-parent-desktop {
+  section {
+    height: 100%;
+
     &:hover {
       // hovering while state = 'none'
       opacity: 1;
-    }
-
-    span {
-      font-size: 5vw;
     }
   }
 }
