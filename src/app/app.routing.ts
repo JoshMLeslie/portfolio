@@ -9,7 +9,7 @@ const routes: Routes = [
       {
         path: 'home'
         , data: {title: 'Home' }
-        , loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        , loadChildren: () => import('./web/home/web-home.module').then(m => m.WebHomeModule)
       },
       {
         path: 'about'
@@ -32,7 +32,7 @@ const routes: Routes = [
       {
         path: 'home'
         , data: { title: 'Home' }
-        , loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+        , loadChildren: () => import('./industrial/home/industrial-home.module').then(m => m.IndustrialHomeModule)
       },
       {
         path: 'about'

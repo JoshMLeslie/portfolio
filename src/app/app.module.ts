@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core.module';
-import { HomeModule } from './home/home.module';
+import { WebHomeModule } from './web/home/web-home.module';
 import { AboutModule } from './about/about.module';
 import { ResumeModule } from './resume/resume.module';
 import { SplitScreenModule } from './split-screen/split-screen.module';
@@ -21,7 +21,7 @@ import { SplitScreenModule } from './split-screen/split-screen.module';
     HttpClientModule,
     AppRouting,
     CoreModule,
-    HomeModule,
+    WebHomeModule,
     AboutModule,
     ResumeModule,
     SplitScreenModule,
