@@ -15,6 +15,7 @@ import {
   , MatFormFieldModule
   , MatInputModule
   , MatSnackBarModule
+  , MatTooltipModule
 } from '@angular/material';
 
 import { DirectivesModule } from 'app/directives/directives.module';
@@ -41,6 +42,7 @@ import { DirectivesModule } from 'app/directives/directives.module';
     , MatInputModule
     , DirectivesModule
     , MatSnackBarModule
+    , MatTooltipModule
   ]
   , exports: [
     CommonModule
@@ -60,6 +62,7 @@ import { DirectivesModule } from 'app/directives/directives.module';
     , MatInputModule
     , DirectivesModule
     , MatSnackBarModule
+    , MatTooltipModule
   ]
 })
 export class CoreModule { }
