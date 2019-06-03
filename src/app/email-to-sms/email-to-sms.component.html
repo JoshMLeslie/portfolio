@@ -1,0 +1,34 @@
+<mat-card fxShow fxHide.lt-sm="true" class="email-to-sms-container">
+  <mat-card-header>
+    <mat-card-title>I encourage you to also check out my site on mobile!</mat-card-title>
+    <mat-card-subtitle>Share with friends! Fill out the form to send a link.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutAlign="flex-start center">
+      <mat-form-field>
+        <mat-label>Phone number</mat-label>
+        <mat-hint>Just the number</mat-hint>
+        <input matInput [formControl]="phoneNumber">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="phoneNumber.valid" class="mt-1">
+        <mat-label>Service Provider</mat-label>
+        <mat-select [(ngModel)]="address">
+          <mat-option *ngFor="let carrier of carrierValues" [value]="carrier.address(phoneNumber.value)">{{carrier.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button *ngIf="phoneNumber.invalid || address.length === 0"
+      disabled mat-flat-button>Send</button>
+    <button *ngIf="phoneNumber.valid && address.length > 0 && !linkSent"
+      mat-flat-button color="primary"
+      (click)="sendLink()">Send</button>
+    <button *ngIf="linkSent" 
+      mat-flat-button color="accent"
+      (click)="sendLink()">Sent!</button>
+  </mat-card-actions>
+</mat-card>

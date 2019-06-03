@@ -48,7 +48,7 @@
     fxLayoutAlign="center center" [@topScreen]="focus"
     (cdkDragMoved)="handleDrag($event)"
     (cdkDragEnded)="handleDragEnd($event)"
-    [style.height.%]="menuStretch('top')"
+    [style.height]="menuStretch('top')"
     (click)="setFocus('top')"
     routerLink="/web" class="top-screen-parent"
     [ngClass]="{'selected': focus === 'top'  || focus === 'bumpTop'}">
@@ -68,7 +68,7 @@
     [@bottomScreen]="focus"
     (cdkDragMoved)="handleDrag($event)"
     (cdkDragEnded)="handleDragEnd($event)"
-    [style.height.%]="menuStretch('bottom')"
+    [style.height]="menuStretch('bottom')"
     (click)="setFocus('bottom')"
     routerLink="/industrial" class="bottom-screen-parent"
     [ngClass]="{'selected': focus === 'bottom' || focus === 'bumpBottom'}">

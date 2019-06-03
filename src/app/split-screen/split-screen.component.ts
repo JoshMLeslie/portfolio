@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { CdkDragMove, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 import { ScreenMovementAnimation } from './split-screen.animation';
@@ -27,38 +28,42 @@ export class SplitScreenComponent implements OnInit {
     }
   }
 
+  _menuDefaultHeight = 7.5;
+  _menuHeight: number = this._menuDefaultHeight; // percentage value
+  menuStretch = (side: 'top' | 'bottom'): SafeStyle => {
+    let style: string;
 
-  _menuStretch: number = 0;
-  menuStretch = (side: 'top' | 'bottom'): number => {
-    return this.topBottomInverse(this.focus) === side ? this._menuStretch : 0;
-    /** TODO: sanitizing unsafe style value */
-    // return this.topBottomInverse(this.focus) === side ? `${this._menuStretch}%` : `calc(${100 - this._menuStretch}% - 1rem`;
+    if (this.focus === 'top' || this.focus === 'bottom') {
+      style = this.topBottomInverse(this.focus) === side ? `${this._menuHeight}%` : `calc(${100 - this._menuHeight}% - 1rem`;
+    } else {
+      return null;
+    }
+
+    return this.domSanitizer.bypassSecurityTrustStyle(style);
   }
 
-  constructor() { }
+  constructor(private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
 
-  shouldBump(callingSide: 'left' | 'right'): boolean {
-    return (this.focus === 'right' && callingSide === 'left') ||
-      (this.focus === 'left' && callingSide === 'right');
-  }
-
-  shouldResetBump(callingSide: 'left' | 'right'): boolean {
-    return (this.focus === 'bumpRight' && callingSide === 'left') ||
-      (this.focus === 'bumpLeft' && callingSide === 'right');
-  }
-
   handleBump(callingSide: 'left' | 'right') {
-    if (this.shouldBump(callingSide) || this.shouldResetBump(callingSide)) {
+    const shouldBump = (cSide: 'left' | 'right'): boolean => (
+      (this.focus === 'right' && cSide === 'left') || (this.focus === 'left' && cSide === 'right')
+    );
+
+    const shouldResetBump = (cSide: 'left' | 'right'): boolean => (
+      (this.focus === 'bumpRight' && cSide === 'left') || (this.focus === 'bumpLeft' && cSide === 'right')
+    );
+
+    if (shouldBump(callingSide) || shouldResetBump(callingSide)) {
       switch (this.focus) {
         case 'right':
           this.focus = 'bumpLeft';
           break;
         case 'bumpRight':
           // moving into 'right' => 'bumpRight', then moving into 'left', reset to 'left'
-          this.focus = 'left'
+          this.focus = 'left';
           break;
         case 'left':
           this.focus = 'bumpRight';
@@ -71,16 +76,13 @@ export class SplitScreenComponent implements OnInit {
     }
   }
 
-  // Mobile handling of top-bottom split
   // Painful but accomplished. Suggested by Alec 19.06.02
   topBottomInverse(side: IFocus | 'top' | 'bottom') {
     switch (side) {
       case 'top':
         return 'bottom';
-        break;
       case 'bottom':
         return 'top';
-        break;
     }
   }
 
@@ -88,16 +90,15 @@ export class SplitScreenComponent implements OnInit {
     const distY: number = Math.abs(e.distance.y);
     if (distY > 50) { // px
       this.focus = this.topBottomInverse(this.focus);
-    } else {
-      this._menuStretch = 7.5;
     }
+
+    this._menuHeight = this._menuDefaultHeight; // reset the bar value for the current menu / new menu.
   }
   handleDrag(e: CdkDragMove) {
     const distY: number = Math.abs(e.distance.y);
-    if (distY > 50) { // px
-      this.focus = this.topBottomInverse(this.focus);
-    } else {
-      this._menuStretch = distY / 2; // scaling reduction
+    if (distY < 60) { // px limit
+      const newHeight = distY / 4;
+      this._menuHeight = newHeight >= this._menuDefaultHeight ? newHeight : this._menuDefaultHeight ; // scaling reduction
     }
 
     e.source.reset(); // reset position of element on page
