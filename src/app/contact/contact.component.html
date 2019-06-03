@@ -1,0 +1,39 @@
+<mat-toolbar fxLayout="column" fxLayoutAlign="center center">
+  <mat-toolbar-row fxLayoutAlign="center center">
+    <span>Josh M Leslie</span>
+  </mat-toolbar-row>
+  <!-- desktop -->
+  <mat-toolbar-row fxShow fxHide.lt-sm="true" fxLayoutAlign="center center">
+    <span class="mr-1"><a class="clear-link" href="mailto:hello@joshmleslie.com">
+        <mat-icon>email</mat-icon>
+      </a></span>
+    <span class="mr-1 hover-opacity cursor-pointer">
+      <mat-icon [copy-to-clipboard]="'203-767-1098'" (copied)="numCopied()">phone</mat-icon>
+    </span>
+    <!-- LinkedIn -->
+    <span class="mr-1"><a class="clear-link" href="https://linkedin.com/in/JoshMLeslie" target="_blank" rel="noopener">
+        <mat-icon svgIcon="linkedin"></mat-icon>
+    </a></span>
+    <!-- Github -->
+    <span class="mr-1"><a class="clear-link" href="https://github.com/JoshMLeslie" target="_blank" rel="noopener">
+      <mat-icon svgIcon="github"></mat-icon>
+    </a></span>
+    <!-- Stackblitz -->
+    <span class=""><a class="clear-link" href="https://stackblitz.com/@JoshMLeslie" target="_blank" rel="nooper">
+      <img [src]="STACK_BLITZ_ICON">
+    </a></span>
+  </mat-toolbar-row>
+  <!-- mobile -->
+  <mat-toolbar-row fxShow fxHide.gt-xs="true" fxLayoutAlign="center center">
+    <span class="mr-1"><a class="clear-link" href="mailto:hello@joshmleslie.com">
+        <mat-icon>email</mat-icon>
+      </a></span>
+    <span class="mr-1"><a class="clear-link" href="tel:203-767-1098">
+        <mat-icon>phone</mat-icon>
+      </a></span>
+    <span><a class="clear-link" href="sms:203-767-1098">
+        <mat-icon>sms</mat-icon>
+      </a></span>
+  </mat-toolbar-row>
+  
+</mat-toolbar>

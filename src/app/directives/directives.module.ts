@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CopyToClipboardDirective } from './copy-to-clipboard.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [CopyToClipboardDirective],
   imports: [
     CommonModule
-    , CopyToClipboardDirective
   ],
   exports: [
     CopyToClipboardDirective
