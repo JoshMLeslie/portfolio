@@ -16,6 +16,8 @@ import {
   , MatInputModule
 } from '@angular/material';
 
+import { DirectivesModule } from 'app/directives/directives.module';
+
 /** They say you should only import what you need into any given module, but. */
 
 @NgModule({
@@ -36,6 +38,7 @@ import {
     , MatSelectModule
     , MatFormFieldModule
     , MatInputModule
+    , DirectivesModule
   ]
   , exports: [
     CommonModule
@@ -53,6 +56,7 @@ import {
     , MatSelectModule
     , MatFormFieldModule
     , MatInputModule
+    , DirectivesModule
   ]
 })
 export class CoreModule { }
