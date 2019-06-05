@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ngh": "ng build --prod --base-href=https://www.joshmleslie.com && ngh --cname=www.joshmleslie.com --dir=dist/portfolio "
+    "prod": "ng build --prod --base-href=https://www.joshmleslie.com",
+    "ngh": "ngh --cname=www.joshmleslie.com --dir=dist/portfolio "
   },
   "private": true,
   "dependencies": {
