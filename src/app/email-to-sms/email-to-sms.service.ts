@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,10 @@ export class EmailToSmsService {
         , responseType: 'text' // needed because of something to do with the way the POST is coming back
       }
     );
-        
+
     return this.http.request(req).pipe(
-      filter(res => res instanceof HttpResponse)
-      , map((res: HttpResponse<any>) => res.status === 200));
+      map((res: HttpResponse<any>) => res.status === 200)
+    );
   }
 
 }

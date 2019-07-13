@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 
 import { EmailToSmsService } from './email-to-sms.service';
+import { tap } from 'rxjs/operators';
 
 const CARRIER_VALUES = [
   { name: 'AT&T', address: (num: string) => `${num}@txt.att.net` }
@@ -31,26 +32,39 @@ const CARRIER_VALUES = [
 export class EmailToSmsComponent implements OnInit {
   carrierValues: {name: string, address: (num: string) => string}[];
 
-  phoneNumber = new FormControl('', [Validators.minLength(9), Validators.required]);
-  address: string = '';
-  linkSent: boolean = false;
+  phoneNumber = new FormControl('', [Validators.pattern(/\d{10}/), Validators.required]);
+  address = '';
+  sent = false;
+  refresh = false;
+  loading = false;
 
   constructor(private service: EmailToSmsService) {
     this.carrierValues = CARRIER_VALUES;
   }
 
-  ngOnInit() {
-    this.phoneNumber.valueChanges.subscribe(val => {
-      if (this.linkSent && val.length > 0) {
-        this.linkSent = false;
-      }
-    })
+  ngOnInit() {}
+
+  resetForm() {
+    this.sent = false;
+    this.refresh = false;
+    this.loading = true;
   }
 
   sendLink() {
-    this.service.sendLink({
-      destination_email: this.address
-    }).subscribe((res: boolean) => this.linkSent = res);
+    this.resetForm();
+
+    this.service.sendLink({destination_email: this.address}).pipe(
+      tap(() => this.loading = false)
+    ).subscribe(
+      () => {
+        this.sent = true;
+        this.refresh = false;
+      }
+      , () => {
+        this.sent = false;
+        this.refresh = true;
+      }
+    );
   }
 
 }

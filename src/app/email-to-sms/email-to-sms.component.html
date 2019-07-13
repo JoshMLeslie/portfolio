@@ -20,14 +20,17 @@
       </mat-form-field>
     </div>
   </mat-card-content>
-
+  
   <mat-card-actions align="end">
-    <button *ngIf="phoneNumber.invalid || address.length === 0"
+    <button *ngIf="(phoneNumber.invalid || address.length === 0) && !refresh && !sent"
       disabled mat-flat-button>Send</button>
-    <button *ngIf="phoneNumber.valid && address.length > 0 && !linkSent"
+    <button *ngIf="phoneNumber.valid && address.length > 0 && !refresh && !sent"
       mat-flat-button color="primary"
       (click)="sendLink()">Send</button>
-    <button *ngIf="linkSent" 
+    <button *ngIf="sent" 
       mat-flat-button color="accent">Sent!</button>
+    <button *ngIf="refresh"
+            (click)="sendLink()"
+            color="warn" mat-flat-button>Retry<mat-icon class="ml-0-5">refresh</mat-icon></button>
   </mat-card-actions>
 </mat-card>
