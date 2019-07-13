@@ -9,17 +9,17 @@ const routes: Routes = [
       {
         path: 'home'
         , data: {title: 'Home' }
-        , loadChildren: () => import('./web/home/web-home.module').then(m => m.WebHomeModule)
+        , loadChildren: () => import('./split-screen/web/home/web-home.module').then(m => m.WebHomeModule)
       },
       {
         path: 'about'
         , data: {title: 'About' }
-        , loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+        , loadChildren: () => import('./shared/about/about.module').then(m => m.AboutModule)
       },
       {
         path: 'resume'
         , data: {title: 'Resume' }
-        , loadChildren: () => import('./resume/resume.module').then(m => m.ResumeModule)
+        , loadChildren: () => import('./shared/resume/resume.module').then(m => m.ResumeModule)
       },
       {
         path: '', pathMatch: 'full', redirectTo: 'home'
@@ -32,17 +32,17 @@ const routes: Routes = [
       {
         path: 'home'
         , data: { title: 'Home' }
-        , loadChildren: () => import('./industrial/home/industrial-home.module').then(m => m.IndustrialHomeModule)
+        , loadChildren: () => import('./split-screen/industrial/home/industrial-home.module').then(m => m.IndustrialHomeModule)
       },
       {
         path: 'about'
         , data: { title: 'About' }
-        , loadChildren: () => import('./about/about.module').then(m => m.AboutModule)
+        , loadChildren: () => import('./shared/about/about.module').then(m => m.AboutModule)
       },
       {
         path: 'resume'
         , data: { title: 'Resume' }
-        , loadChildren: () => import('./resume/resume.module').then(m => m.ResumeModule)
+        , loadChildren: () => import('./shared/resume/resume.module').then(m => m.ResumeModule)
       },
       {
         path: '', pathMatch: 'full', redirectTo: 'home'

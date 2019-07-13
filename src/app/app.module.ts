@@ -6,10 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core.module';
-import { WebHomeModule } from './web/home/web-home.module';
-import { AboutModule } from './about/about.module';
-import { ResumeModule } from './resume/resume.module';
-import { SplitScreenModule } from './split-screen/split-screen.module';
+import { WebHomeModule } from 'app/split-screen/web/home/web-home.module';
+import { AboutModule } from 'app/shared/about/about.module';
+import { ResumeModule } from 'app/shared/resume/resume.module';
+import { SplitScreenModule } from 'app/split-screen//split-screen.module';
 
 @NgModule({
   declarations: [

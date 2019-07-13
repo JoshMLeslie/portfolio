@@ -5,7 +5,7 @@ import { SplitScreenComponent } from './split-screen.component';
 import { CoreModule } from 'app/core.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { NavBarModule } from 'app/nav-bar/nav-bar.module';
+import { NavBarModule } from './nav-bar/nav-bar.module';
 
 @NgModule({
   declarations: [SplitScreenComponent],
