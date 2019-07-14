@@ -1,37 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
-    path: 'web'
+    path: ''
     , children: [
       {
-        path: 'home'
-        , data: {title: 'Home' }
+        path: 'web'
+        , data: { title: 'Web Design' }
         , loadChildren: () => import('./split-screen/web/home/web-home.module').then(m => m.WebHomeModule)
       },
       {
-        path: 'about'
-        , data: {title: 'About' }
-        , loadChildren: () => import('./shared/about/about.module').then(m => m.AboutModule)
-      },
-      {
-        path: 'resume'
-        , data: {title: 'Resume' }
-        , loadChildren: () => import('./shared/resume/resume.module').then(m => m.ResumeModule)
-      },
-      {
-        path: '', pathMatch: 'full', redirectTo: 'home'
-      }
-    ]
-  },
-  {
-    path: 'industrial'
-    , children: [
-      {
-        path: 'home'
-        , data: { title: 'Home' }
+        path: 'industrial'
+        , data: { title: 'Industrial Design' }
         , loadChildren: () => import('./split-screen/industrial/home/industrial-home.module').then(m => m.IndustrialHomeModule)
       },
       {
@@ -44,9 +25,6 @@ const routes: Routes = [
         , data: { title: 'Resume' }
         , loadChildren: () => import('./shared/resume/resume.module').then(m => m.ResumeModule)
       },
-      {
-        path: '', pathMatch: 'full', redirectTo: 'home'
-      }
     ]
   },
   {
