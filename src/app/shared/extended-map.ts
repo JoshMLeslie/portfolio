@@ -10,10 +10,11 @@ export class ExtendedMap<T, X> extends Map {
 
 	filter(check: (value: any, key: any) => boolean) {
 		// I just really wanted this.
-		this.forEach((value: any, key: any) => {
-			check(value, key) ? this.set(key, value) : this.delete(key);
+		const temp = Object.assign(this);
+		temp.forEach((value: any, key: any) => {
+			check(value, key) ? temp.set(key, value) : temp.delete(key);
 		});
 
-		return this;
+		return temp;
 	}
 }

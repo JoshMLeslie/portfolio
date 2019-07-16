@@ -4,10 +4,10 @@ import { AboutComponent } from './about.component';
 import { CoreModule } from 'app/core.module';
 
 @NgModule({
-  declarations: [AboutComponent],
-  imports: [
-    CoreModule,
-    AboutRoutingModule
-  ]
+	declarations: [AboutComponent],
+	imports: [
+		CoreModule,
+		AboutRoutingModule
+	]
 })
 export class AboutModule { }

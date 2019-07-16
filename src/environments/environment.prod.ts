@@ -1,4 +1,4 @@
 export const environment = {
-  production: true
-  , githubUser: 'joshmleslie'
+	production: true
+	, githubUser: 'joshmleslie'
 };

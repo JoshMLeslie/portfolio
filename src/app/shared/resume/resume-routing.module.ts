@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ResumeComponent } from './resume.component';
 
 const routes: Routes = [
-  {
-    path: '', component: ResumeComponent
-  }
+	{
+		path: '', component: ResumeComponent
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class ResumeRoutingModule { }

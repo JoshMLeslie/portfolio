@@ -6,7 +6,7 @@
   <section fxLayoutAlign="center center"
           [@leftScreen]="focus"
           (mouseenter)="handleBump('left')"
-          (click)="focus = 'left'"
+          (click)="setFocus('left', 'web')"
           routerLink="/web"
           class="left-screen-parent"
           [ngClass]="{'selected': focus === 'left'  || focus === 'bumpLeft'}">
@@ -24,7 +24,7 @@
   <section fxLayoutAlign="center center"
           [@rightScreen]="focus"
           (mouseenter)="handleBump('right')"
-          (click)="focus = 'right'"
+          (click)="setFocus('right', 'industrial')"
           routerLink="/industrial"
           class="right-screen-parent"
           [ngClass]="{'selected': focus === 'right' || focus === 'bumpRight'}">
@@ -49,7 +49,7 @@
     (cdkDragMoved)="handleDrag($event)"
     (cdkDragEnded)="handleDragEnd($event)"
     [style.height]="menuStretch('top')"
-    (click)="setFocus('top')"
+    (click)="setFocus('top', 'web')"
     routerLink="/web" class="top-screen-parent"
     [ngClass]="{'selected': focus === 'top'  || focus === 'bumpTop'}">
     <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">
@@ -69,7 +69,7 @@
     (cdkDragMoved)="handleDrag($event)"
     (cdkDragEnded)="handleDragEnd($event)"
     [style.height]="menuStretch('bottom')"
-    (click)="setFocus('bottom')"
+    (click)="setFocus('bottom', 'industrial')"
     routerLink="/industrial" class="bottom-screen-parent"
     [ngClass]="{'selected': focus === 'bottom' || focus === 'bumpBottom'}">
     <div *ngIf="focus === 'none'" fxLayout="column" fxLayoutAlign="center center">

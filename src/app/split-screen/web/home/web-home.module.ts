@@ -8,13 +8,13 @@ import { EmailToSmsModule } from 'app/shared/email-to-sms/email-to-sms.module';
 import { ContactModule } from 'app/shared/contact/contact.module';
 
 @NgModule({
-  declarations: [WebHomeComponent],
-  imports: [
-    CoreModule
-    , WebHomeRoutingModule
-    , GithubModule
-    , EmailToSmsModule
-    , ContactModule
-  ]
+	declarations: [WebHomeComponent],
+	imports: [
+		CoreModule
+		, WebHomeRoutingModule
+		, GithubModule
+		, EmailToSmsModule
+		, ContactModule
+	]
 })
 export class WebHomeModule { }

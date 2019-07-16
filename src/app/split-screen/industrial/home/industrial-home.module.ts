@@ -7,12 +7,12 @@ import { ContactModule } from 'app/shared/contact/contact.module';
 import { EmailToSmsModule } from 'app/shared/email-to-sms/email-to-sms.module';
 
 @NgModule({
-  declarations: [IndustrialHomeComponent],
-  imports: [
-    CoreModule
-    , IndustrialHomeRoutingModule
-    , ContactModule
-    , EmailToSmsModule
-  ]
+	declarations: [IndustrialHomeComponent],
+	imports: [
+		CoreModule
+		, IndustrialHomeRoutingModule
+		, ContactModule
+		, EmailToSmsModule
+	]
 })
 export class IndustrialHomeModule { }

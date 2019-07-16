@@ -3,21 +3,21 @@ import { Repo } from './repos';
 import { ReposService } from './repos.service';
 
 @Component({
-  selector: 'app-repos',
-  templateUrl: './repos.component.html',
-  styleUrls: ['./repos.component.scss']
+	selector: 'app-repos',
+	templateUrl: './repos.component.html',
+	styleUrls: ['./repos.component.scss']
 })
 export class ReposComponent implements OnInit {
 
-  repos: Repo[];
+	repos: Repo[];
 
-  constructor(private reposService: ReposService) { }
+	constructor(private reposService: ReposService) { }
 
-  ngOnInit() {
-    this.reposService.getRepos().subscribe(repos => {
-     debugger
-      this.repos = repos
-    });
-  }
+	ngOnInit() {
+		this.reposService.getRepos().subscribe(repos => {
+			debugger;
+			this.repos = repos;
+		});
+	}
 
 }

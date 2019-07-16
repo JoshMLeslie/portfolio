@@ -2,10 +2,12 @@
   <div fxShow fxHide.lt-md="true" fxLayoutAlign="flex-end center">
     <div fxLayoutAlign="center center" class="header-button-size-adjust">
       <mat-tab-group
+        [selectedIndex]="1"
         (selectedTabChange)="changeTab($event)">
         <mat-tab *ngFor="let tab of tabs | keyvalue"
-                  [label]="tab.value.title"
-                  [ngClass]="{'active-link': (selected$ | async) === tab.value.url}"></mat-tab>
+                [label]="tab.value.title"
+                [ngClass]="{'active-link': selected === tab.value.url}">
+        </mat-tab>
       </mat-tab-group>
     </div>
   </div>

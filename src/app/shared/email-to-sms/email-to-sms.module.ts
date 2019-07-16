@@ -5,12 +5,12 @@ import { EmailToSmsComponent } from './email-to-sms.component';
 import { EmailToSmsService } from './email-to-sms.service';
 
 @NgModule({
-  declarations: [EmailToSmsComponent],
-  imports: [
-    CommonModule
-    , CoreModule
-  ],
-  providers: [EmailToSmsService],
-  exports: [EmailToSmsComponent]
+	declarations: [EmailToSmsComponent],
+	imports: [
+		CommonModule
+		, CoreModule
+	],
+	providers: [EmailToSmsService],
+	exports: [EmailToSmsComponent]
 })
 export class EmailToSmsModule { }

@@ -2,36 +2,37 @@ import { Directive, Input, Output, EventEmitter, HostListener } from '@angular/c
 
 @Directive({ selector: '[copy-to-clipboard]' })
 export class CopyToClipboardDirective {
-  // https://stackoverflow.com/questions/49102724/angular-5-copy-to-clipboard
+	// https://stackoverflow.com/questions/49102724/angular-5-copy-to-clipboard
 
-  @Input('copy-to-clipboard')
-  public payload: string;
+	@Input('copy-to-clipboard')
+	public payload: string;
 
-  @Output()
-  public copied: EventEmitter<string> = new EventEmitter<string>();
+	@Output()
+	public copied: EventEmitter<string> = new EventEmitter<string>();
 
-  @HostListener('click', ['$event'])
-  public onClick(event: MouseEvent): void {
+	@HostListener('click', ['$event'])
+	public onClick(event: MouseEvent): void {
 
-    event.preventDefault();
-    if (!this.payload) {
-      return;
-    }
+		event.preventDefault();
+		if (!this.payload) {
+			return;
+		}
 
-    const listener = (e: ClipboardEvent) => {
-      e.preventDefault();
+		const listener = (e: ClipboardEvent) => {
+			e.preventDefault();
 
-      const clipboard = e.clipboardData || window['clipboardData']; // redundancy for unsupported browsers
+			// tslint:disable-next-line: no-string-literal
+			const clipboard = e.clipboardData || window['clipboardData']; // redundancy for unsupported browsers
 
-      if (clipboard) {
-        clipboard.setData('text', this.payload.toString());
+			if (clipboard) {
+				clipboard.setData('text', this.payload.toString());
 
-        this.copied.emit(this.payload);
-      }
-    };
+				this.copied.emit(this.payload);
+			}
+		};
 
-    document.addEventListener('copy', listener, false);
-    document.execCommand('copy');
-    document.removeEventListener('copy', listener, false);
-  }
+		document.addEventListener('copy', listener, false);
+		document.execCommand('copy');
+		document.removeEventListener('copy', listener, false);
+	}
 }
