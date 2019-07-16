@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { ScreenMovementAnimation } from './split-screen.animation';
 import { SplitScreenSideService, IFocus, FocusMain, ISide } from './split-screen.service';
+import { Router } from '@angular/router';
 
 const BUMP_CONFIG: {[focus: string]: IFocus} = {
 	right: 'bumpLeft',
@@ -22,15 +23,20 @@ export class SplitScreenComponent {
 	constructor(
 		private domSanitizer: DomSanitizer
 		, private sideService: SplitScreenSideService
+		, private router: Router
 	) { }
 	focus: IFocus = 'none';
 
 	_menuDefaultHeight = 7.5;
 	_menuHeight: number = this._menuDefaultHeight; // percentage value
 	setFocus(side: IFocus, url: ISide) {
-		this.focus = side;
-		if (this.focus in FocusMain) {
-			this.sideService.side = url;
+		if (this.focus !== side) {
+			this.focus = side;
+			if (this.focus in FocusMain) {
+				this.sideService.side = url;
+			}
+
+			this.router.navigateByUrl(url);
 		}
 	}
 	menuStretch = (side: 'top' | 'bottom'): SafeStyle => {
