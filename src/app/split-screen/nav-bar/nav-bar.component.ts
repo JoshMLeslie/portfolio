@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ChildActivationEnd, Router, ActivatedRoute } from '@angular/router';
-import { ExtendedMap } from 'app/shared/extended-map';
+import { SuperMap } from 'app/shared/extended-map';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
 import { SplitScreenSideService } from '../split-screen.service';
 
-const TAB_ROUTES = new ExtendedMap<string, {title: string, url: string}>([
+const TAB_ROUTES = new SuperMap<string, {title: string, url: string}>([
 	['About', { title: 'About', url: 'about' }]
-	, ['Home', { title: 'Home', url: '' }]
 	, ['Resume', { title: 'Resume', url: 'resume' }]
 ]);
 
@@ -19,9 +18,9 @@ const TAB_ROUTES = new ExtendedMap<string, {title: string, url: string}>([
 })
 export class NavBarComponent implements OnInit {
 
-	public selected$ = new BehaviorSubject<string>('Home');
+	// public selected$ = new BehaviorSubject<string>('Home');
 
-	tabs: ExtendedMap<string, {[attr: string]: string}>;
+	tabs: SuperMap<string, {[attr: string]: string}>;
 
 	constructor(
 		private router: Router
@@ -29,15 +28,10 @@ export class NavBarComponent implements OnInit {
 	) {
 		this.tabs = TAB_ROUTES;
 
-		this.sideService.activeSide$.subscribe(side => {
-			this.tabs.get('Home').url = side;
-		});
-
 		this.router.events.pipe(
-			filter(event => event instanceof ChildActivationEnd && !!event.snapshot.data.title)
-			, map((event: ChildActivationEnd) => event.snapshot.data.title)
-			, map(e => /web|industrial/.test(e) ? 'Home' : e)
-			, tap(e => this.selected$.next(e))
+			filter(e => e instanceof ChildActivationEnd && !!e.snapshot.data.title)
+			, tap((e: ChildActivationEnd) => e.snapshot.data.routes ? this.tabs.add(e.snapshot.data.routes) : null)
+			// , tap((e: ChildActivationEnd) => this.selected$.next(e.snapshot.data.title))
 		).subscribe();
 	}
 

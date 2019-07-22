@@ -6,6 +6,8 @@ import { SplitScreenModule } from 'app/split-screen//split-screen.module';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { CoreModule } from './core.module';
+import { WindowService } from 'app/shared/window.service';
+import { XRModule } from 'app/shared/xr/xr.module';
 
 @NgModule({
 	declarations: [
@@ -18,8 +20,9 @@ import { CoreModule } from './core.module';
 		AppRouting,
 		CoreModule,
 		SplitScreenModule,
+		XRModule
 	],
-	providers: [],
+	providers: [WindowService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
