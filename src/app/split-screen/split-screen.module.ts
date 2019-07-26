@@ -7,6 +7,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { SplitScreenSideService } from './split-screen.service';
+import { SongToPianoModule } from 'app/shared/song-to-piano/song-to-piano.module';
 
 @NgModule({
 	declarations: [SplitScreenComponent],
@@ -15,6 +16,7 @@ import { SplitScreenSideService } from './split-screen.service';
 		, CoreModule
 		, NavBarModule
 		, DragDropModule
+		, SongToPianoModule
 	],
 	providers: [SplitScreenSideService],
 	exports: [SplitScreenComponent]

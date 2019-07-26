@@ -1,0 +1,1 @@
+create a component that can listen to a song and records / converts the notes to sheet music (for a piano)
