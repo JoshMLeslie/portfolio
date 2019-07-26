@@ -6,6 +6,7 @@ import { CoreModule } from 'app/core.module';
 import { GithubModule } from '../github/github.module';
 import { EmailToSmsModule } from 'app/shared/email-to-sms/email-to-sms.module';
 import { ContactModule } from 'app/shared/contact/contact.module';
+import { WebProjectsModule } from '../projects/projects.module';
 
 @NgModule({
 	declarations: [WebHomeComponent],
@@ -15,6 +16,7 @@ import { ContactModule } from 'app/shared/contact/contact.module';
 		, GithubModule
 		, EmailToSmsModule
 		, ContactModule
+		, WebProjectsModule
 	]
 })
 export class WebHomeModule { }
