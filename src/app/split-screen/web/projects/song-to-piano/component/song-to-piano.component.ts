@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SongToPianoService } from './song-to-piano.service';
+import { SongToPianoService } from '../song-to-piano.service';
 
 @Component({
 	selector: 'app-song-to-piano',

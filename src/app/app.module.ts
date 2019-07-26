@@ -7,7 +7,7 @@ import { XRModule } from 'app/split-screen/web/projects/xr/xr.module';
 import { SplitScreenModule } from 'app/split-screen//split-screen.module';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
-import { CoreModule } from './core.module';
+import { CoreModule } from './shared/core.module';
 
 @NgModule({
 	declarations: [

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RotaryMenuComponent } from './rotary-menu.component';
-import { CoreModule } from 'app/core.module';
+import { CoreModule } from 'app/shared/core.module';
 
 @NgModule({
 	declarations: [RotaryMenuComponent],

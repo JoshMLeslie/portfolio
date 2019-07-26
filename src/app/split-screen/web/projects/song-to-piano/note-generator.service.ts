@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, EMPTY, from, Subject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
-import { WindowService } from '../../../../shared/window.service';
+import { WindowService } from 'app/shared/window.service';
 
 const NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 

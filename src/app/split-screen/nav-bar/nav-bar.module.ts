@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NavBarComponent } from './nav-bar.component';
-import { CoreModule } from 'app/core.module';
+import { CoreModule } from 'app/shared/core.module';
 import { RotaryMenuModule } from 'app/shared/rotary-menu/rotary-menu.module';
 
 @NgModule({
