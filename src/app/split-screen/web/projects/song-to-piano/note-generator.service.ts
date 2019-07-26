@@ -19,7 +19,7 @@ export class NoteGeneratorService {
 		this.MAX_SIZE = Math.max(4, Math.floor(this.audioContext.sampleRate / 5000));
 	}
 
-	/* Work largely done by Chris Wilson (c) 2014 used under The MIT License (MIT) Copyright */
+	/* Work largely done by Chris Wilson (c) 2014 used under The MIT License (MIT) -- https://github.com/cwilso/PitchDetect*/
 
 	public noteList = new BehaviorSubject<string>('');
 
