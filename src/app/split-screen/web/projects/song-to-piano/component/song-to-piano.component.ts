@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SongToPianoService } from '../song-to-piano.service';
+import { NoteGeneratorService } from '../note-generator.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { distinctUntilChanged, scan } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-song-to-piano',
@@ -10,7 +13,12 @@ export class SongToPianoComponent implements OnInit {
 
 	@ViewChild('volumeInput', {static: true}) volumeInput: ElementRef;
 
-	constructor(private songService: SongToPianoService) { }
+	note$: Observable<string>;
+
+	constructor(
+		private songService: SongToPianoService
+		, private noteService: NoteGeneratorService
+	) { }
 
 	ngOnInit() {
 		// enable volume input control for user's speakers
@@ -21,7 +29,9 @@ export class SongToPianoComponent implements OnInit {
 			console.log('curr_volume ', currVolume);
 		});
 
-		this.songService.webaudioToolingObj();
+		this.note$ = this.noteService.noteList$.pipe(distinctUntilChanged());
+		this.noteService.toggleLiveInput();
+		// this.songService.webaudioToolingObj();
 	}
 
 }
