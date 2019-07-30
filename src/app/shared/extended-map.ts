@@ -1,45 +1,62 @@
-export class SuperMap<T extends string, X> {
-	private _hash: {[attr: string]: any};
-	private _list: T[] = [];
-	private _index: {[key: string]: number};
+/** **Only** because you can't *really* extend the Map object. */
+export class SuperMap<T, X> {
+	// tslint:disable:variable-name
+	private _dict: {[attr: string]: number};	// _key: value_index	// for O(n) lookup by key
+	private _list: X[] = [];									// [value]	 					// for predictable iteration
+	// tslint:enable:variable-name
 
 	constructor(data?: [T, X][]) {
 
 	}
 
-	get(key?: T) {
-		return key ? this._hash[key] : this._hash;
+	get(key: string) {
+		return this._list[this._dict[key]];
+	}
+	getIndex(index: string) {
+		return this._list[index];
 	}
 
 	add(k: any, v?: X) {
 		if ( !(k instanceof SuperMap) && !v) {
-			throw Error('Must provide a value for the key');
+			throw Error('Value for a key cannot be undefined');
 		} else if (k instanceof SuperMap) {
-
+			this.combine(k);
 		} else {
-			k = this.stringify(k);
+			if (k in this._dict) {
+				this.bumpIndices(k);
+			}
 
-			this.checkList(k);
-
-			this.setIndex(k);
-			this._list.push(k);
-			this._hash[k] = v;
+			this._list.push(v);
+			this._dict[k] = this._list.length;
 		}
+
+		return this;
 	}
 
-	combine(m: SuperMap<T, X>): SuperMap<T, X> {
-		this._hash = Object.assign(this._hash, m._hash);
-		this._list = this._list.concat(m._list);
-		this._index = Object.assign(this._index, m._index);
+	update(k: any, v: X) {
+		this._list[this._dict[k]] = v;
 
-		this.ensure();
+		return this;
+	}
+
+	// todo
+	// move(k: any, newI: number) {
+
+	// 	this.bumpIndices(k);
+
+	// }
+
+	/** Mutates the leading SuperMap with a provided SuperMap  */
+	combine(m: SuperMap<T, X>): SuperMap<T, X> {
+		this._list = this._list.concat(m._list);
+		this._dict = Object.assign(this._dict, m._dict);
 
 		return this;
 	}
 
 	delete(key: T | T[]) {
-		const _delete = (_key) => {
-			delete this._hash[_key];
+		const _delete = (_key) => { // tslint:disable-line:variable-name
+			delete this._dict[_key];
 			this._list = this._list.filter(k => _key !== k);
 		};
 		if (key instanceof Array) {
@@ -49,11 +66,22 @@ export class SuperMap<T extends string, X> {
 		}
 	}
 
-	forEach(callback: (value: T, index: number) => void) {
+	forEach(callback: (value: X, index: number) => void) {
 		for (let i = 0; i < this._list.length; i++) {
-			const k = this._list[i];
-			const v = this._hash[k];
+			const v = this._list[i];
 			callback(v, i);
+		}
+	}
+
+	private bumpIndices(k: string, by: number = 1) {
+		const oldI = this._dict[k];
+		this._list.splice(oldI, 1);
+
+		for (const v in this._dict) {
+			const i = this._dict[v];
+			if (i > oldI) {
+				this._dict[v] = i - by;
+			}
 		}
 	}
 
@@ -68,39 +96,4 @@ export class SuperMap<T extends string, X> {
 	// 	return this;
 	// }
 
-	private ensure() {
-		for (const val in this._list) {
-			const i = this._index[val];
-
-			if (!i) {
-				
-			}
-
-		}
-
-	}
-
-	private parseAdd(k: any): void {
-		if (k instanceof SuperMap) {
-
-		} else {
-
-		}
-	}
-
-	private checkList(k: string) {
-		// if a key is already in the list, remove it to update it
-		const listIndex = this._index[k];
-		if (this._list[listIndex] === k) {
-			this._list.splice(listIndex, 1);
-		}
-	}
-	
-	private setIndex(key: string, index?: number) {
-		this._index[key] = index || this._list.length - 1;
-	}
-
-	private stringify(k: any) {
-		return typeof k === 'string' ? k : JSON.stringify(k);
-	}
 }

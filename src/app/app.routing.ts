@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { WebHomeComponent } from './split-screen/web/home/web-home.component';
+import { RouterModule, Routes } from '@angular/router';
 import { IndustrialHomeComponent } from './split-screen/industrial/home/industrial-home.component';
-import { SuperMap } from './shared/extended-map';
-
-const webRoutes = new SuperMap([
-	['Home', { title: 'Home', url: 'web' }]
-	, ['Projects', {title: 'Projects', url: 'web/projects'}]
-	, ['Github', {title: 'Github', url: 'web/github'}]
-]);
+import { WebHomeComponent } from './split-screen/web/home/web-home.component';
 
 const routes: Routes = [
 	{
@@ -16,9 +9,7 @@ const routes: Routes = [
 		, children: [
 			{
 				path: 'web'
-				, data: {
-					title: 'Web Design', routes: webRoutes
-				}
+				, data: { title: 'Web Design' }
 				, component: WebHomeComponent
 				, children: [
 					{
@@ -26,9 +17,11 @@ const routes: Routes = [
 						, data: { title: 'Github' }
 						, loadChildren: () => import('./split-screen/web/github/github.module').then(m => m.GithubModule)
 					}
-					// , {
-					// 	path: 'projects'
-					// }
+					, {
+						path: 'projects'
+						, data: { title: 'Projects' }
+						, loadChildren: () => import('./split-screen/web/projects/projects.module').then(m => m.WebProjectsModule)
+					}
 				]
 			},
 			{

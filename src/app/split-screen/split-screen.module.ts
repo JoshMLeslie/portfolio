@@ -6,7 +6,6 @@ import { CoreModule } from 'app/shared/core.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { NavBarModule } from './nav-bar/nav-bar.module';
-import { SplitScreenSideService } from './split-screen.service';
 
 @NgModule({
 	declarations: [SplitScreenComponent],
@@ -16,7 +15,7 @@ import { SplitScreenSideService } from './split-screen.service';
 		, NavBarModule
 		, DragDropModule
 	],
-	providers: [SplitScreenSideService],
+	providers: [],
 	exports: [SplitScreenComponent]
 })
 export class SplitScreenModule { }

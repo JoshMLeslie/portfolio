@@ -11,7 +11,6 @@ export class SongToPianoService {
 
 	private audioContext = new AudioContext();
 	private BUFF_SIZE = 16384;
-	private audioInput = null;
 	private microphoneStream = null;
 	private scriptProcessorNode = null;
 	private scriptProcessorFFTNode = null;
@@ -44,17 +43,6 @@ export class SongToPianoService {
 		}
 	}
 
-	showSomeData(givenTypedArray, numRowToDisplay, label) {
-		const sizeBuffer = givenTypedArray.length;
-		const maxIndex = numRowToDisplay;
-
-		console.log('__________ ' + label);
-
-		for (let index = 0; index < maxIndex && index < sizeBuffer; index += 1) {
-			console.log(givenTypedArray[index]);
-		}
-	}
-
 	startMicrophone(stream) {
 		this.gainNode = this.audioContext.createGain();
 		this.gainNode.connect(this.audioContext.destination);
@@ -63,7 +51,6 @@ export class SongToPianoService {
 		this.microphoneStream.connect(this.gainNode);
 
 		this.scriptProcessorNode = this.audioContext.createScriptProcessor(this.BUFF_SIZE, 1, 1);
-		this.scriptProcessorNode.onaudioprocess = this.processMicrophoneBuffer.bind(this);
 
 		this.microphoneStream.connect(this.scriptProcessorNode);
 
@@ -83,27 +70,6 @@ export class SongToPianoService {
 			// get the average for the first channel
 			const arr = new Uint8Array(this.analyserNode.frequencyBinCount);
 			this.analyserNode.getByteFrequencyData(arr);
-
-			// draw the spectrogram
-			if (this.microphoneStream.playbackState === this.microphoneStream.PLAYING_STATE) {
-
-				this.showSomeData(arr, 5, 'from fft');
-			}
 		};
-	}
-
-	processMicrophoneBuffer(event) {
-		// invoked by event loop
-		let i;
-		let N;
-		let inp;
-		let microphoneOutputBuffer;
-
-		// just mono - 1 channel for now
-		microphoneOutputBuffer = event.inputBuffer.getChannelData(0);
-
-		// microphone_output_buffer  <-- this buffer contains current gulp of data size BUFF_SIZE
-
-		this.showSomeData(microphoneOutputBuffer, 5, 'from getChannelData');
 	}
 }

@@ -1,17 +1,14 @@
 <div class="nav-container">
   <div fxShow fxHide.lt-md="true" fxLayoutAlign="flex-end center">
     <div fxLayoutAlign="center center" class="header-button-size-adjust">
-      <mat-tab-group
-        [selectedIndex]="1"
-        (selectedTabChange)="changeTab($event)">
-        <mat-tab *ngFor="let tab of tabs | keyvalue"
-                [label]="tab.value.title"
-                [ngClass]="{'active-link': selected === tab.value.url}">
+      <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="changeTab($event)">
+        <mat-tab *ngFor="let tab of tabs"
+          [label]="tab.title"
+          [ngClass]="{'active-link': selected === tab.url}">
         </mat-tab>
       </mat-tab-group>
     </div>
   </div>
-
   <!-- mobile -->
   <!-- <mat-toolbar fxShow fxHide.gt-xs="true" fxLayoutAlign="center center" color="primary">
     {{selected$ | async}}

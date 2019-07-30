@@ -1,9 +1,10 @@
 import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SideService } from '../shared/side.service';
+import { FocusMain, IFocus, ISide } from './split-screen';
 import { ScreenMovementAnimation } from './split-screen.animation';
-import { SplitScreenSideService, IFocus, FocusMain, ISide } from './split-screen.service';
-import { Router } from '@angular/router';
 
 const BUMP_CONFIG: {[focus: string]: IFocus} = {
 	right: 'bumpLeft',
@@ -18,17 +19,32 @@ const BUMP_CONFIG: {[focus: string]: IFocus} = {
 	styleUrls: ['./split-screen.component.scss'],
 	animations: ScreenMovementAnimation
 })
-export class SplitScreenComponent {
-
-	constructor(
-		private domSanitizer: DomSanitizer
-		, private sideService: SplitScreenSideService
-		, private router: Router
-	) { }
-	focus: IFocus = 'none';
+export class SplitScreenComponent implements OnInit {
+	@ViewChild('desktop', {static: true}) desktop: ElementRef;
+	@ViewChild('mobile', {static: true}) mobile: ElementRef;
 
 	_menuDefaultHeight = 7.5;
 	_menuHeight: number = this._menuDefaultHeight; // percentage value
+	focus: IFocus = 'none';
+
+	constructor(
+		private domSanitizer: DomSanitizer
+		, private sideService: SideService
+		, private router: Router
+		, private active: ActivatedRoute
+	) {}
+
+	ngOnInit() {
+		// switch (url) {
+		// 	case '/web':
+		// 		this.setFocus(this.desktop ? 'left' : 'top', 'web');
+		// 		break;
+		// 	case '/industrial':
+		// 		this.setFocus(this.desktop ? 'right' : 'bottom', 'industrial');
+		// 		break;
+		// }
+	}
+
 	setFocus(side: IFocus, url: ISide) {
 		if (this.focus !== side) {
 			this.focus = side;
@@ -39,14 +55,14 @@ export class SplitScreenComponent {
 			this.router.navigateByUrl(url);
 		}
 	}
-	menuStretch = (side: 'top' | 'bottom'): SafeStyle => {
+
+	menuStretch(side: 'top' | 'bottom'): SafeStyle {
 		let style: string;
 		if (this.focus === 'top' || this.focus === 'bottom') {
 			style = this.topBottomInverse(this.focus) === side ? `${this._menuHeight}%` : `calc(${100 - this._menuHeight}% - 1rem`;
-		} else {
-			return null;
+			return this.domSanitizer.bypassSecurityTrustStyle(style);
 		}
-		return this.domSanitizer.bypassSecurityTrustStyle(style);
+		return null;
 	}
 
 	// Bumping for desktop only
@@ -77,7 +93,6 @@ export class SplitScreenComponent {
 		if (distY > 50) { // px
 			this.focus = this.topBottomInverse(this.focus);
 		}
-
 		this._menuHeight = this._menuDefaultHeight; // reset the bar value for the current menu / new menu.
 	}
 	handleDrag(e: CdkDragMove) {
@@ -86,7 +101,6 @@ export class SplitScreenComponent {
 			const newHeight = distY / 4;
 			this._menuHeight = newHeight >= this._menuDefaultHeight ? newHeight : this._menuDefaultHeight ; // scaling reduction
 		}
-
 		e.source.reset(); // reset position of element on page
 	}
 }

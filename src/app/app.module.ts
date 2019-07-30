@@ -2,12 +2,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WindowService } from 'app/shared/window.service';
-import { XRModule } from 'app/split-screen/web/projects/xr/xr.module';
-import { SplitScreenModule } from 'app/split-screen//split-screen.module';
+import { SplitScreenModule } from 'app/split-screen/split-screen.module';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
-import { CoreModule } from './shared/core.module';
+import { SharedModule } from './shared';
 
 @NgModule({
 	declarations: [
@@ -18,11 +16,10 @@ import { CoreModule } from './shared/core.module';
 		BrowserAnimationsModule,
 		HttpClientModule,
 		AppRouting,
-		CoreModule,
 		SplitScreenModule,
-		XRModule
+		SharedModule
 	],
-	providers: [WindowService],
+	providers: [],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

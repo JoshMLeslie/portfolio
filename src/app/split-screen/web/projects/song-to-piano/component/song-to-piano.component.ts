@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { SongToPianoService } from '../song-to-piano.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NoteGeneratorService } from '../note-generator.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, scan } from 'rxjs/operators';
+import { SongToPianoService } from '../song-to-piano.service';
 
 @Component({
 	selector: 'app-song-to-piano',
@@ -29,9 +28,12 @@ export class SongToPianoComponent implements OnInit {
 			console.log('curr_volume ', currVolume);
 		});
 
-		this.note$ = this.noteService.noteList$.pipe(distinctUntilChanged());
-		this.noteService.toggleLiveInput();
+		this.note$ = this.noteService.noteList$;
 		// this.songService.webaudioToolingObj();
+	}
+
+	toggleNoteInput() {
+		this.noteService.toggleLiveInput();
 	}
 
 }
