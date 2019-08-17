@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContactComponent } from './contact.component';
 import { CoreModule } from 'app/shared/utilities/core.module';
+import { ProjectTileComponent } from './project-tile.component';
 
 @NgModule({
-	declarations: [ContactComponent],
+	declarations: [ProjectTileComponent],
 	imports: [
 		CommonModule
 		, CoreModule
 	],
-	exports: [ContactComponent]
+	providers: [],
+	exports: [ProjectTileComponent]
 })
-export class ContactModule { }
+export class ProjecTileModule { }

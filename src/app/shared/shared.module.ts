@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from './core.module';
-import { WindowService } from './window.service';
-import { SideService } from './side.service';
-
+import { CoreModule, WindowService, LogService, SideService } from './utilities';
 
 @NgModule({
 	declarations: [],
@@ -10,8 +7,8 @@ import { SideService } from './side.service';
 		CoreModule
 	],
 	exports: [
-		CoreModule
+		CoreModule,
 	],
-	providers: [WindowService, SideService]
+	providers: [WindowService, LogService, SideService]
 })
 export class SharedModule { }

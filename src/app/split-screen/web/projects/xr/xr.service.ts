@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WindowService } from 'app/shared/window.service';
-import { from, Observable, forkJoin, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { LogService, WindowService } from 'app/shared';
+import { forkJoin, from, Observable } from 'rxjs';
 import { ISession, ISessionRaw, NAVIGATOR_XR_MODES, XRSession } from './xr';
 
 @Injectable({
@@ -11,15 +10,18 @@ export class XRService {
 
 	type: NAVIGATOR_XR_MODES = NAVIGATOR_XR_MODES.INLINE;
 
-	constructor(private windowService: WindowService) { }
+	constructor(
+		private windowService: WindowService,
+		private log: LogService
+	) { }
 
 	public setSessionType(): Observable<ISession[]> {
-		const modeTests = [];
+		const modeTests: Observable<ISession>[] = [];
 		for (const mode in NAVIGATOR_XR_MODES) {
 			modeTests.push(this.getMode(NAVIGATOR_XR_MODES[mode]));
 		}
 
-		return forkJoin(...modeTests);
+		return forkJoin(modeTests);
 	}
 
 	public startSession(type: NAVIGATOR_XR_MODES): Observable<XRSession> {
@@ -28,20 +30,21 @@ export class XRService {
 		return from(this.windowService.navigator['xr'].requestSession(type) as Promise<XRSession>);
 	}
 
-	// private getMode(mode: string): Observable<ISession> {
-	private getMode(mode: string): Observable<any> {
-		// tslint:disable-next-line:no-string-literal
+	private getMode(mode: string): Observable<ISession> {
 		return new Observable(o => {
 			const { next, error, complete } = o;
+
+			// tslint:disable-next-line:no-string-literal
 			this.windowService.navigator['xr'].supportsSessionMode(mode)
 			.then((e: ISessionRaw) => {
 				next({
 					state: e.__zone_symbol__state
 					, value: e.__zone_symbol__value
 				});
-				// complete();
+				complete();
 			})
 			.catch((e: any) => {
+				this.log.error(e);
 				error({
 					state: false
 					, value: [false]

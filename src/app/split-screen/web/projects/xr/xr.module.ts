@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { XrComponent } from './xr.component';
-import { CoreModule } from 'app/shared/core.module';
+import { CoreModule } from 'app/shared/utilities/core.module';
 
 @NgModule({
 	declarations: [XrComponent],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-web-home',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WebHomeComponent implements OnInit {
 	window: Window;
-	constructor() { this.window = window; }
+	constructor(private active: ActivatedRoute) { 
+		this.window = window;
+		console.log(this.active);
+	}
 
 	ngOnInit() {
 	}

@@ -2,7 +2,7 @@ import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SideService } from '../shared/side.service';
+import { SideService } from '../shared/utilities/side.service';
 import { FocusMain, IFocus, ISide } from './split-screen';
 import { ScreenMovementAnimation } from './split-screen.animation';
 

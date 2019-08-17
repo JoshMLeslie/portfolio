@@ -16,7 +16,9 @@ export class NavBarComponent implements OnInit {
 	constructor(
 		private active: ActivatedRoute
 		, private router: Router
-	) {}
+	) {
+		console.log(this.active.snapshot.data)
+	}
 
 	ngOnInit() {
 		const url = this.router.routerState.snapshot.url;

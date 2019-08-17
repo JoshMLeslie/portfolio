@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from 'app/shared/core.module';
+import { CoreModule } from 'app/shared/utilities/core.module';
 import { SongToPianoModule } from './song-to-piano/song-to-piano.module';
-import { ProjectsComponent } from './projects.component';
+import { WebProjectsComponent } from './projects.component';
+import { XRModule } from './xr/xr.module';
+import { ProjecTileModule } from 'app/shared/project-tile/project-tile.module';
+import { WebProjectsRoutingModule } from './projects.routing';
 
 @NgModule({
-	declarations: [ProjectsComponent],
+	declarations: [WebProjectsComponent],
 	imports: [
 		CommonModule
+		, WebProjectsRoutingModule
 		, CoreModule
+		, ProjecTileModule
 		, SongToPianoModule
+		, XRModule
 	],
-	exports: [ProjectsComponent]
+	exports: [WebProjectsComponent]
 })
 export class WebProjectsModule { }
