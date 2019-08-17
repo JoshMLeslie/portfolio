@@ -3,15 +3,15 @@ const BASE_TABS = [
 	, { title: 'Resume', url: 'resume' }
 ];
 
-/* Because routing data refuses to work */
+/* Because routing data refuses to work the way I want it to */
 export const TAB_ROUTES = {
-	'/web': [
+	web: [
 		{ title: 'Home', url: 'web' }
 		, { title: 'Projects', url: 'web/projects'}
 		, { title: 'Github', url: 'web/github'}
 		, ...BASE_TABS
 	],
-	'/industrial': [
+	industrial: [
 		{ title: 'Home', url: 'industrial' }
 		, ...BASE_TABS
 	],

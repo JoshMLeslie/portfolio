@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TAB_ROUTES } from './nav-bar.config';
+import { SideService } from 'app/shared/utilities';
 
 @Component({
 	selector: 'app-nav-bar',
@@ -16,12 +17,13 @@ export class NavBarComponent implements OnInit {
 	constructor(
 		private active: ActivatedRoute
 		, private router: Router
+		, private sideService: SideService
 	) {
 		console.log(this.active.snapshot.data)
 	}
 
 	ngOnInit() {
-		const url = this.router.routerState.snapshot.url;
+		const url = this.sideService.getSide();
 		this.tabs = TAB_ROUTES[url] || TAB_ROUTES.default;
 		this.selectedIndex = this.tabs.findIndex(set => set.url === url);
 	}
