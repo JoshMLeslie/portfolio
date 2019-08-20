@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WebHomeComponent } from './home/web-home.component';
 
-
 const routes: Routes = [
 	{
-		path: 'web'
-		, data: { title: 'Web Design' }
-		, component: WebHomeComponent
+		path: '',
+		component: WebHomeComponent
 		, children: [
 			{
 				path: 'github'

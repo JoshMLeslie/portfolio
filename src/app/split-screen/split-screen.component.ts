@@ -1,10 +1,10 @@
 import { CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SideService } from '../shared/utilities/side.service';
 import { ScreenMovementAnimation } from './split-screen.animation';
-import { FocusMain, IFocus, ISide, INVERT_BUMP, INVERT_TOP_BOTTOM } from './split-screen.types';
+import { FocusMain, IFocus, INVERT_BUMP, INVERT_TOP_BOTTOM, ISide } from './split-screen.types';
 
 @Component({
 	selector: 'app-split-screen',
@@ -12,7 +12,7 @@ import { FocusMain, IFocus, ISide, INVERT_BUMP, INVERT_TOP_BOTTOM } from './spli
 	styleUrls: ['./split-screen.component.scss'],
 	animations: ScreenMovementAnimation
 })
-export class SplitScreenComponent implements OnInit {
+export class SplitScreenComponent implements AfterViewInit {
 	focus: IFocus = 'none';
 	private _menuDefaultHeight = 7.5;  // percentage value
 	private _menuHeight: number = this._menuDefaultHeight;
@@ -21,16 +21,19 @@ export class SplitScreenComponent implements OnInit {
 		private domSanitizer: DomSanitizer
 		, private sideService: SideService
 		, private router: Router
-	) {}
-
-	ngOnInit() {
+	) {
 	}
 
-	setFocus(side: IFocus, url: ISide) {
-		if (this.focus !== side) {
-			this.focus = side;
+	ngAfterViewInit() {
+		this.sideService.url$.subscribe(url => this.setFocus(this.sideService.focus, url));
+	}
+
+	setFocus(focus: IFocus, url: string) {
+		console.log(focus + ' ' + url);
+		if (this.focus !== focus) {
+			this.focus = focus;
 			if (this.focus in FocusMain) {
-				this.sideService.setSide(url);
+				this.sideService.setSideByFocus(focus as FocusMain);
 			}
 			this.router.navigateByUrl(url);
 		}

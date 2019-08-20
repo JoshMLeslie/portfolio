@@ -15,17 +15,16 @@ export class NavBarComponent implements OnInit {
 	selectedIndex: number;
 
 	constructor(
-		private active: ActivatedRoute
-		, private router: Router
+		private router: Router
 		, private sideService: SideService
-	) {
-		console.log(this.active.snapshot.data)
-	}
+	) {}
 
 	ngOnInit() {
-		const url = this.sideService.getSide();
-		this.tabs = TAB_ROUTES[url] || TAB_ROUTES.default;
-		this.selectedIndex = this.tabs.findIndex(set => set.url === url);
+		const url = this.sideService.side;
+		if (url) {
+			this.tabs = TAB_ROUTES[url] || TAB_ROUTES.default;
+			this.selectedIndex = this.tabs.findIndex(set => set.url === url);
+		}
 	}
 
 	changeTab(event: MatTabChangeEvent) {
