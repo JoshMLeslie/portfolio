@@ -1,7 +1,7 @@
 <mat-card fxShow fxHide.lt-sm="true" class="email-to-sms-container">
   <mat-card-header>
     <mat-card-title>I encourage you to also check out my site on mobile!</mat-card-title>
-    <mat-card-subtitle>Share with friends! Fill out the form to send a link.</mat-card-subtitle>
+    <mat-card-subtitle>Unfortunately I have deactivated the SMS service supporthing this feature</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
@@ -9,7 +9,7 @@
       <mat-form-field>
         <mat-label>Phone number</mat-label>
         <mat-hint>Just the number</mat-hint>
-        <input matInput [formControl]="phoneNumber">
+        <input matInput disabled [formControl]="phoneNumber">
       </mat-form-field>
 
       <mat-form-field *ngIf="phoneNumber.valid" class="mt-1">
@@ -25,6 +25,7 @@
     <button *ngIf="(phoneNumber.invalid || address.length === 0) && !refresh && !sent"
       disabled mat-flat-button>Send</button>
     <button *ngIf="phoneNumber.valid && address.length > 0 && !refresh && !sent"
+      disabled
       mat-flat-button color="primary"
       (click)="sendLink()">Send</button>
     <button *ngIf="sent" 
